@@ -44,22 +44,38 @@ public class Task3CompareCharacterArraysLexicographically {
         }
 
 
-        // Finding the smaller array between the two
+        // Finding the smaller array length between the two.
         int minLength = Math.min((charArr1.length), charArr2.length);
 
 
-        // Comparing them
+        // I will store the comparison result in this variable
+        String result = "";
+
+
+        // Comparing the characters till the smaller array's length
         for (int i = 0; i < minLength; i++) {
             if (charArr1[i] < charArr2[i]) {
-                System.out.print("first");
+                result = "first";
                 break;
             } else if (charArr2[i] < charArr1[i]) {
-                System.out.print("second");
+                result = "second";
                 break;
             } else {
-                System.out.print("equal");
-                break;
+                result = "equal";
             }
         }
+
+        // If one of the arrays is longer than the other it is actually bigger
+        // lexicographically. I am checking this here
+        if (result.equals("equal")) {
+            if (charArr1.length < charArr2.length) {
+                result = "first";
+            } else if (charArr1.length > charArr2.length) {
+                result = "second";
+            }
+        }
+
+        // Printing the result
+        System.out.print(result);
     }
 }
