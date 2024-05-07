@@ -14,6 +14,8 @@ The input will consist of valid integer numbers
 
  */
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -21,38 +23,44 @@ public class Pack2Task2NegativePositiveSort {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Read the input as string
-        String[] numbersInput = scanner.nextLine().split(" ");
+        // Reading the input
+        String[] numbers = scanner.nextLine().split(" ");
 
-        // Declaring an empty array
-        int[] numbersInt = new int[numbersInput.length];
 
-        // Filling the array with the input values
-        for (int i = 0; i < numbersInput.length; i++) {
-            numbersInt[i] = Integer.parseInt(numbersInput[i]);
+        // Numbers array
+        int[] numbersInt = new int[numbers.length];
+
+
+        // Filling the array with separated elements from the input
+        for (int i = 0; i < numbersInt.length; i++) {
+            numbersInt[i] = Integer.parseInt(numbers[i]);
         }
 
 
-        // Declaring the new arrSorted
-        int[] arrSorted = new int[numbersInput.length];
+        // Declaring an array list for both the positive and negative numbers
+        // from the numbersInt list
+        ArrayList<Integer> numPositive = new ArrayList<>();
+        ArrayList<Integer> numNegative = new ArrayList<>();
 
 
-        int indexNegative = arrSorted.length - 1;
-        int indexPositive = 0;
-
-        // Sorting the numbers
-        for (int i = 0; i < arrSorted.length; i++) {
-            if (numbersInt[i] >= 0 ) {
-                arrSorted[indexPositive] = numbersInt[i];
-                indexPositive++;
+        // Filling the array list with the elements from the numbersInt array
+        for (int i = 0; i < numbersInt.length; i++) {
+            if (numbersInt[i] >= 0) {
+                numPositive.add(numbersInt[i]);
             } else {
-                arrSorted[indexNegative] = numbersInt[i];
-                indexNegative--;
+                numNegative.add(numbersInt[i]);
             }
-
         }
 
-        System.out.println(Arrays.toString(arrSorted));
 
+        // Combining the array lists together
+        ArrayList<Integer> combined = new ArrayList<>(numNegative);
+        combined.addAll(numPositive);
+
+
+        // Printing the combined array list
+        for (int i = 0; i < combined.size(); i++) {
+            System.out.printf("%s ", combined.get(i));
+        }
     }
 }
