@@ -1,13 +1,13 @@
 /*
-Write a program that rotates a list several times (the first element becomes last).
+Write a program that rotates a numbers several times (the first element becomes last).
 
-list = 1,2,3,4,5 and N = 2 -> result = 3,4,5,1,2
-Note that N could be larger than the length of the list.
+numbers = 1,2,3,4,5 and N = 2 -> result = 3,4,5,1,2
+Note that N could be larger than the length of the numbers.
 
-list = 1,2,3,4,5 and N = 6 -> result = 2,3,4,5,1
+numbers = 1,2,3,4,5 and N = 6 -> result = 2,3,4,5,1
 
 Input
-On the first line you will receive the list of numbers.
+On the first line you will receive the numbers of numbers.
 On the second line you will receive N
 
 Output
@@ -23,32 +23,37 @@ public class Pack2Task3RotateList {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Reading the numbers
-        String[] list = scanner.nextLine().split(",");
+        // Reading the numbers and splitting them in a String array
+        String[] numbers = scanner.nextLine().split(",");
 
-        // Reading the number of times the list will be rotated;
-        int n = scanner.nextInt();
-
-        int[] arrNum = new int[list.length];
-
-        // Filling the arrNum with the parsed integers from list
-        for (int i = 0; i < list.length; i++) {
-            arrNum[i] = Integer.parseInt(list[i]);
-        }
-
-        int[] arrRotated = new int[list.length];
+        
+        // Get the numberOfRotates as int
+        int numberOfRotates = Integer.parseInt(scanner.nextLine());
 
 
-        for (int i = 0; i < n; i++) {
-            int index = 1;
-            for (int j = 0; j < arrNum.length; j++) {
-                arrRotated[list.length - index] = arrNum[j];
-                index++;
+        // Store the length in a variable "size" - we need to use it several times
+        // 'size' is shorter than 'numbers.length' for reading and writing
+        int size = numbers.length;
+
+
+        // Loop from 0 to numberOfRotates
+        for (int i = 0; i < numberOfRotates; i++) {
+            // Save the first number in firstNum - it will go at the end later
+            String firstNum = numbers[0];
+
+            // Create nested loop j from 0 to size - 1
+            for (int j = 0; j < size - 1; j++) {
+                // Move each next number (j + 1)
+                // to the place of the current (j)
+                numbers[j] = numbers[j + 1];
             }
+
+            // Set the last element in the array to be firstNum
+            numbers[size - 1] = firstNum;
         }
 
-        for (int i = 0; i < arrRotated.length; i++) {
-            System.out.printf("%d ", arrRotated[i]);
-        }
+
+        // Output using String.join(",", numbers)
+        System.out.println(String.join(",", numbers));
     }
 }
