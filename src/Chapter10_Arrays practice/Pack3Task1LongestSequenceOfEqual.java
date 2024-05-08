@@ -50,9 +50,19 @@ public class Pack3Task1LongestSequenceOfEqual {
 
         // Finding the repeating numbers sequence
         for (int i = 0; i < numbers.length-1; i++) {
+            // If we encounter two equal adjacent numbers
+            // we update the current sequence
             if (numbers[index] == numbers[i]) {
                 currSequence++;
-                maxSequence = currSequence;
+
+                // The max sequence is only being updated if the curr
+                //sequence is greater than the max sequence
+                if (currSequence > maxSequence) {
+                    maxSequence = currSequence;
+                }
+
+            // If the current adjacent numbers are not equal reset the
+            // currSequence variable
             } else {
                 currSequence = 1;
             }
