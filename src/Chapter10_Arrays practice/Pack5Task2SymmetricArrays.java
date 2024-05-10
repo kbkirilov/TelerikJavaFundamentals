@@ -42,7 +42,7 @@ public class Pack5Task2SymmetricArrays {
                 }
             }
 
-        System.out.println(checkResult);
+            System.out.println(checkResult);
 
         }
     }
