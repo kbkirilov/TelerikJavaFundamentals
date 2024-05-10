@@ -22,47 +22,36 @@ public class Pack5Task3IsArrayInWaveForm {
         Scanner scanner = new Scanner(System.in);
 
         // Reading the input
-        String[] numbers = scanner.nextLine().split(" ");
+        String[] numbersAsString = scanner.nextLine().split(" ");
 
-        String isTrue = "yes";
+        int[] numbers = new int[numbersAsString.length];
 
-        for (int i = 0; i < numbers.length - 1; i++) {
-
-            int current = Integer.parseInt(numbers[i]);
-            int next = Integer.parseInt(numbers[i+ 1]);
-
-            if (i == 0 ) {
-                if (current > next) {
-                    continue;
-                } else {
-                    isTrue = "no";
-                    break;
-                }
-            } else if (i == 1) {
-                if (current < next) {
-                    continue;
-                } else {
-                    isTrue = "no";
-                    break;
-                }
-            } else if (i % 2 == 0) {
-                if (current > next) {
-                    continue;
-                } else {
-                    isTrue = "no";
-                    break;
-                }
-            } else if (i % 2 == 1) {
-                if (current < next) {
-                    continue;
-                } else {
-                    isTrue = "no";
-                    break;
-                }
-            }
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = Integer.parseInt(numbersAsString[i]);
         }
 
-        System.out.println(isTrue);
+        String result = "yes";
+
+        // We maintain three indices as we need to compare three consecutive numbers:
+        int firstNumber = 0;
+        int secondNumber = 1;
+        int thirdNumber = 2;
+
+        while (thirdNumber < numbers.length) {
+            if ((numbers[firstNumber] <= numbers[secondNumber] && numbers[secondNumber] <= numbers[thirdNumber]) ||
+                    (numbers[firstNumber] >= numbers[secondNumber] && numbers[secondNumber] >= numbers[thirdNumber])) {
+                result = "no";
+            }
+
+            // Move indices to the next three consecutive numbers
+            firstNumber++;
+            secondNumber++;
+            thirdNumber++;
+
+        }
+
+        // Output
+        System.out.println(result);
 
     }
 }
