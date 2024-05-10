@@ -34,7 +34,7 @@ public class Pack3Task2StrangeOrders {
         }
 
 
-        // Using array lists to solve the task
+        // Using array list to solve the task
         ArrayList<Integer> arrListNegatives = new ArrayList<>();
         ArrayList<Integer> arrListZeros = new ArrayList<>();
         ArrayList<Integer> arrListPositive = new ArrayList<>();
