@@ -25,69 +25,46 @@ public class Pack4Task1BelowandAboveAverage {
         Scanner scanner = new Scanner(System.in);
 
         // Get numbersAsString as array
-        String[] numbersAsString  = scanner.nextLine().split(",");
+        String[] numbers  = scanner.nextLine().split(",");
 
-        // Convert the string array to a numbers array
-        double[] numbers = new double[numbersAsString .length];
+        StringBuilder below = new StringBuilder();
+        StringBuilder above = new StringBuilder();
+
+        // Calculate the sum of all numbers by iterating over them and adding
+        // the current number to the sum variable
+        double sum = 0;
         for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = Double.parseDouble(numbersAsString [i]);
+            sum += Integer.parseInt(numbers[i]);
         }
 
-        // The sum of all the elements in the array
-        double sumAllNumbers = 0;
-        
-        // Summing all the elements int the array
+        double avg = sum / numbers.length;
+
+        // Filling the string builders with values
         for (int i = 0; i < numbers.length; i++) {
-            // Adding all the elements in the array together
-            sumAllNumbers += numbers[i];
-            
-        }
 
-        // Finding the average that we will need for the
-        //comparison
-        double average = sumAllNumbers / numbers.length;
+            // Declaring and initializing a current variable
+            // Parsing the number, so it can be used in
+            // calculations
+            int current = Integer.parseInt(numbers[i]);
 
-
-        // Declaring two array lists for elements below the
-        // average and above the average
-        ArrayList<Double> belowAverage = new ArrayList<>();
-        ArrayList<Double> aboveAverage = new ArrayList<>();
-
-
-        // Doing the comparison
-        for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i] < average) {
-                belowAverage.add(numbers[i]);
-            } else if (numbers[i] > average){
-                aboveAverage.add(numbers[i]);
+            // Building a new string
+            if (current < avg) {
+                // Append the number to the list of numbers below avg, then append a comma
+                below.append(current).append(",");
+            } else if (current > avg) {
+                // Append the number to the list of numbers below avg, then append a comma
+                above.append(current).append(",");
             }
         }
 
+        // Deleting the commas
+        below.deleteCharAt(below.length() - 1);
+        above.deleteCharAt(above.length() - 1);
 
-        // Printing the first line
-        System.out.printf("avg: %.2f\n", average);
+        // Output
+        System.out.printf("avg: %.2f%n", avg);
+        System.out.printf("below: %s%n", below);
+        System.out.printf("above: %s", above);
 
-        // Printing the second line
-        System.out.print("below: ");
-        for (int i = 0; i < belowAverage.size(); i++) {
-            System.out.printf("%.0f", belowAverage.get(i));
-
-            if (i < belowAverage.size() - 1) {
-                System.out.print(",");
-            }
-        }
-
-        System.out.println();
-
-        // Printing the third line
-        System.out.print("above: ");
-        for (int i = 0; i < aboveAverage.size(); i++) {
-            System.out.printf("%.0f", aboveAverage.get(i));
-
-            if (i < aboveAverage.size() - 1) {
-                System.out.print(",");
-            }
-        }
-        System.out.println();
     }
 }
