@@ -25,42 +25,38 @@ public class Pack6Task1ArraySort {
         // Reading the input
         String[] numbersAsString = scanner.nextLine().split(",");
 
-        int[] numbers = new int[numbersAsString.length];
+        // Declaring a new array for the sorted elements
+        String[] numSorted = new String[numbersAsString.length];
 
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = Integer.parseInt(numbersAsString[i]);
-        }
-
-        int zeros = 0;
-
-        // Finding the zeros in the array
-        for (int i = 0; i < numbers.length; i++) {
-            int current = numbers[i];
-
-            if (current == 0) {
-                zeros++;
-            }
-        }
-
-        int[] numSorted = new int[numbers.length];
 
         int index = 0;
 
-        for (int num : numbers) {
-            if (num == 0) {
+        // Fill the numSorted array with all the elements except the zeros
+        for (String num : numbersAsString) {
+            //Skip the zeros
+            if (num.equals("0")) {
                 continue;
+            // Fill the elements according to their original order
             } else {
                 numSorted[index] = num;
                 index++;
             }
-
         }
 
-        for (int numbersSorted : numSorted) {
-            if (numbersSorted != numbersSorted[numbersSorted.length -1 ]) {
+        // This keeps track of the correct index when adding the zeros to the
+        // numSorted array
+        int indexZeros = 0;
 
+        // Adding the zeros at the end of the array
+        for (String num : numSorted) {
+            if (num == null) {
+                numSorted[indexZeros] = "0";
             }
+            indexZeros++;
         }
+
+        // Printing the result
+        System.out.println(String.join(",", numSorted));
 
     }
 }
