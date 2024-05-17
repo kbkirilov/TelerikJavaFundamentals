@@ -4,7 +4,16 @@ public class CapturingRainwater {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int[] arr = {4, 2, 1, 3, 0, 1, 2};
+        System.out.println("Please enter the numbers that make up the histogram" +
+                "separated with a single identation ");
+        String[] arrAsString = scanner.nextLine().split(" ");
+
+        int[] arr = new int[arrAsString.length];
+
+        // Fills the array with the parsed numbers from arrAsString
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = Integer.parseInt(arrAsString[i]);
+        }
 
         // Largest element in the array;
         int largestElement = Integer.MIN_VALUE;
@@ -89,6 +98,8 @@ public class CapturingRainwater {
                 String previous = Character.toString(currElement.charAt(j - 1));
                 String next = Character.toString(currElement.charAt(j + 1));
                 String nextAfterNext = Character.toString(currElement.charAt(j + 2));
+                String first = Character.toString(currElement.charAt(0));
+                String last = Character.toString(currElement.charAt(currElement.length() - 1));
 
                 // When to add water and when not to
                 if (curr.equals("0") && previous.equals("*") && next.equals("*")) {
@@ -99,11 +110,16 @@ public class CapturingRainwater {
                         (curr.equals("0") && (previous.equals("*") && next.equals("0") && nextAfterNext.equals("*"))))) {
                     water++;
                 }
+
+                if (first.equals("*") && last.equals("*") && curr.equals("0") && next.equals("0") && nextAfterNext.equals("0")) {
+                    water++;
+                }
             }
 
             index2--;
         }
 
+        System.out.println();
 
         // Printing the result
         if (water == 1) {
