@@ -4,8 +4,8 @@ public class CapturingRainwater {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Please enter the numbers that make up the histogram" +
-                "separated with a single identation ");
+        System.out.println("Please enter the pillars height  " +
+                "separated with a single indentation: ");
         String[] arrAsString = scanner.nextLine().split(" ");
 
         int[] arr = new int[arrAsString.length];
@@ -93,6 +93,7 @@ public class CapturingRainwater {
             String currElement = arrWaterNotFilled[index2];
 
             // Checks each character of each element in the arrWaterNotFilled array
+            // Each element is a single row composed of stars ("*") and zeros ("0")
             for (int j = 1; j < currElement.length() - 2; j++) {
                 String curr = Character.toString(currElement.charAt(j));
                 String previous = Character.toString(currElement.charAt(j - 1));
@@ -102,18 +103,12 @@ public class CapturingRainwater {
                 String last = Character.toString(currElement.charAt(currElement.length() - 1));
 
                 // When to add water and when not to
-                if (curr.equals("0") && previous.equals("*") && next.equals("*")) {
-                    water++;
+                if (first.equals("*") && last.equals("*")) {
+                    if (curr.equals("0") || next.equals("0")) {
+                        water++;
+                    }
                 }
 
-                if ((curr.equals("0") && (previous.equals("*") && next.equals("0") && nextAfterNext.equals("0")) ||
-                        (curr.equals("0") && (previous.equals("*") && next.equals("0") && nextAfterNext.equals("*"))))) {
-                    water++;
-                }
-
-                if (first.equals("*") && last.equals("*") && curr.equals("0") && next.equals("0") && nextAfterNext.equals("0")) {
-                    water++;
-                }
             }
 
             index2--;
