@@ -35,6 +35,18 @@ public class CapturingRainwater {
         // water amount
         int water = 0;
 
+        // used to count the occurrences of "0"
+        int count0 = 0;
+
+        // These will be used to count the occurrence of the zeros in
+        // the histogram
+        String curr = "";
+        String previous = "";
+        String next = "";
+        String nextAfterNext = "";
+        String first = "";
+        String last = "";
+
         //
         int lineBelow = lines;
 
@@ -92,26 +104,37 @@ public class CapturingRainwater {
 
             String currElement = arrWaterNotFilled[index2];
 
+            for (int k = 0; k < arrWaterNotFilled[index2].length(); k++) {
+                if (Character.toString(arrWaterNotFilled[index2].charAt(k)).equals("0")) {
+                    count0++;
+                }
+            }
+
             // Checks each character of each element in the arrWaterNotFilled array
             // Each element is a single row composed of stars ("*") and zeros ("0")
             for (int j = 1; j < currElement.length() - 2; j++) {
-                String curr = Character.toString(currElement.charAt(j));
-                String previous = Character.toString(currElement.charAt(j - 1));
-                String next = Character.toString(currElement.charAt(j + 1));
-                String nextAfterNext = Character.toString(currElement.charAt(j + 2));
-                String first = Character.toString(currElement.charAt(0));
-                String last = Character.toString(currElement.charAt(currElement.length() - 1));
-
-                // When to add water and when not to
-                if (first.equals("*") && last.equals("*")) {
-                    if (curr.equals("0") || next.equals("0")) {
-                        water++;
-                    }
-                }
+                curr = Character.toString(currElement.charAt(j));
+                previous = Character.toString(currElement.charAt(j - 1));
+                next = Character.toString(currElement.charAt(j + 1));
+                nextAfterNext = Character.toString(currElement.charAt(j + 2));
+                first = Character.toString(currElement.charAt(0));
+                last = Character.toString(currElement.charAt(currElement.length() - 1));
 
             }
 
+            // When to add water and when not to
+            if (first.equals("*") && last.equals("*")) {
+                water += count0;
+            }
+
+            if (first.equals("*") && last.equals("0")) {
+                if (curr.equals("0")) {
+                    water++;
+                }
+            }
+
             index2--;
+            count0 = 0;
         }
 
         System.out.println();
