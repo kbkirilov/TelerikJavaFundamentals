@@ -19,7 +19,7 @@ please note that there is space after each coma.
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class MockExams4Task3AloneNumbers {
+public class MockExams3Task3AloneNumbers {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
