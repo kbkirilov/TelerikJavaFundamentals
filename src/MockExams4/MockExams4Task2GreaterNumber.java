@@ -28,26 +28,35 @@ public class MockExams4Task2GreaterNumber {
         String[] arrB = scanner.nextLine().split(",");
         String[] arrA = scanner.nextLine().split(",");
 
+        int[] arrBAsInt = new int[arrB.length];
+        int[] arrAAsInt = new int[arrA.length];
+
+        for (int i = 0; i < arrBAsInt.length; i++) {
+            arrBAsInt[i] = Integer.parseInt(arrB[i]);
+        }
+
+        for (int i = 0; i < arrAAsInt.length; i++) {
+            arrAAsInt[i] = Integer.parseInt(arrA[i]);
+        }
+
         // Filling the array list
         ArrayList<Integer> result = new ArrayList<>();
 
-        int maxIndexB =  arrB.length - 1;
 
-        for (int i = 0; i < arrB.length; i++) {
+        for (int i = 0; i < arrBAsInt.length; i++) {
 
-            String currElementInBAsString = arrB[i];
-            int currElementInBAsInt = Integer.parseInt(arrB[i]);
+            int currElementInBAsInt = arrBAsInt[i];
 
             for (int j = 0; j < arrA.length; j++) {
 
-                if (currElementInBAsString.equals(arrA[j])) {
+                // If the current element in B equals an element in A
+                if (currElementInBAsInt == arrAAsInt[j]) {
 
-                    int currElementInAAsInt = Integer.parseInt(arrA[j]);
-
-                    // Check if this is the last element in arrA
-                    if (j != arrA.length - 1) {
+                    // Make sure the current element in B is not the last
+                    // element in A
+                    if (j != arrAAsInt.length - 1) {
                         // The next element in the parent arrA
-                        int nextElementInAAsInt = Integer.parseInt(arrA[j + 1]);
+                        int nextElementInAAsInt = arrAAsInt[j + 1];
 
                         if (nextElementInAAsInt > currElementInBAsInt) {
                             result.add(nextElementInAAsInt);
@@ -61,7 +70,6 @@ public class MockExams4Task2GreaterNumber {
 
             }
         }
-
 
         // Prints the result
         for (int i = 0; i < result.size(); i++) {
