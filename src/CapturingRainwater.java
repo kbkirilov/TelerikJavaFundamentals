@@ -1,3 +1,24 @@
+/*
+Capturing Rainwater
+
+Create a CapturingRainwater() method that takes in an array of heights,
+and returns the amount of rainwater that could be contained in that array.
+
+For example, the array [4, 2, 1, 3, 0, 1, 2] can be represented by the
+following histogram:
+
+*
+*     *
+* *   *     *
+* * * *   * *
+* * * * * * *
+
+As you can see, there are 6 units of water that can be contained so calling
+CapturingRainwater() on the array [4, 2, 1, 3, 0, 1, 2] should return 6.
+
+ */
+
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
