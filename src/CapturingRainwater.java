@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CapturingRainwater {
@@ -28,28 +29,16 @@ public class CapturingRainwater {
         // This is used to update the index of each element in the arr
         // array when printing each row.
         int index = 0;
-
         // Max number of lines to print:
         int lines = largestElement;
-
         // water amount
         int water = 0;
+        int currWater = 0;
+        // This will store the index position of the stars in each element in
+        // the arrWaterNotFilled array
+        ArrayList<Integer> arrStarsIndex = new ArrayList<>();
 
-        // used to count the occurrences of "0"
-        int count0 = 0;
-
-        // These will be used to count the occurrence of the zeros in
-        // the histogram
-        String curr = "";
-        String previous = "";
-        String next = "";
-        String nextAfterNext = "";
-        String first = "";
-        String last = "";
-
-        //
         int lineBelow = lines;
-
         int rows = lines + 1;
 
         // This will store the histogram in an array
@@ -59,7 +48,7 @@ public class CapturingRainwater {
         // will be appended to the arrWaterNotFilled array
         StringBuffer sb = new StringBuffer();
 
-        System.out.println("This is the histogram before filling it with water:");
+        System.out.println("This is the histogram before filling it with water:\n");
         // Prints the content of each of the lines
         // Prints the histogram towers (without the water)
         for (int i = 0; i <= lines; i++) {
@@ -89,52 +78,33 @@ public class CapturingRainwater {
             // Resets the values
             index = 0;
             lineBelow--;
-
-            // Goes on a new line
-            //System.out.println();
         }
 
-        // Now the arrWaterNotFilled array contains the whole histogram
-        // "x" are the static spaces and "0" are the empty ones
+        // Calculates the water that the histogram can hold
+        for (int i = 0; i < arrWaterNotFilled.length; i++) {
 
-        int index2 = arrWaterNotFilled.length - 1;
+            // The current element is arrWaterNotFilled
+            String currElement = arrWaterNotFilled[i];
 
-        // Checks each element in the arrWaterNotFilled array
-        for (int i = arrWaterNotFilled.length - 1; i >= 0 ; i--) {
-
-            String currElement = arrWaterNotFilled[index2];
-
-            for (int k = 0; k < arrWaterNotFilled[index2].length(); k++) {
-                if (Character.toString(arrWaterNotFilled[index2].charAt(k)).equals("0")) {
-                    count0++;
+            // Find the index position of each "*" and fills them in the
+            // arrStarsIndex array list
+            for (int j = 0; j < currElement.length(); j++) {
+                if (currElement.charAt(j) == '*') {
+                    arrStarsIndex.add(j);
                 }
             }
 
-            // Checks each character of each element in the arrWaterNotFilled array
-            // Each element is a single row composed of stars ("*") and zeros ("0")
-            for (int j = 1; j < currElement.length() - 2; j++) {
-                curr = Character.toString(currElement.charAt(j));
-                previous = Character.toString(currElement.charAt(j - 1));
-                next = Character.toString(currElement.charAt(j + 1));
-                nextAfterNext = Character.toString(currElement.charAt(j + 2));
-                first = Character.toString(currElement.charAt(0));
-                last = Character.toString(currElement.charAt(currElement.length() - 1));
-
+            // Calculates the empty spaces between the stars using their index position
+            for (int k = 0; k < arrStarsIndex.size() - 1; k++) {
+                currWater = arrStarsIndex.get(k + 1) - (arrStarsIndex.get(k) + 1);
+                water += currWater;
+                currWater = 0;
             }
 
-            // When to add water and when not to
-            if (first.equals("*") && last.equals("*")) {
-                water += count0;
-            }
+            // Resetting the array list,so it's ready to get the stars index in the next
+            // arrWaterNotFilled element
+            arrStarsIndex.clear();
 
-            if (first.equals("*") && last.equals("0")) {
-                if (curr.equals("0")) {
-                    water++;
-                }
-            }
-
-            index2--;
-            count0 = 0;
         }
 
         System.out.println();
@@ -147,6 +117,5 @@ public class CapturingRainwater {
         } else {
             System.out.println("This histogram can't capture any water");
         }
-
     }
 }
