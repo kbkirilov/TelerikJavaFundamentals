@@ -18,19 +18,17 @@ public class Pack1Task2BonusScore {
 
         int score = scanner.nextInt();
 
-        if (score >=1 && score <= 3) {
-            score = score * 10;
+        if (score >= 1 && score <= 3) {
+            score *= 10;
+            System.out.println(score);
         } else if (score >=4 && score <= 6) {
             score = score * 100;
+            System.out.println(score);
         } else if (score >=7 && score <= 9) {
             score = score * 1000;
+            System.out.println(score);
         } else {
             System.out.println("invalid score");
-            return;
         }
-
-        System.out.println(score);
-
     }
-
 }
