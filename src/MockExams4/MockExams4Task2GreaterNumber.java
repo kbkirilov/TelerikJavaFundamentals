@@ -25,52 +25,49 @@ public class MockExams4Task2GreaterNumber {
         // Reading the parent set A and the subset B
         // We first read the subset (set B) and then we read
         // the second one, which is the parent set (set A)
-        String[] arrB = scanner.nextLine().split(",");
-        String[] arrA = scanner.nextLine().split(",");
+        String[] arrBAsString = scanner.nextLine().split(",");
+        String[] arrAAsString = scanner.nextLine().split(",");
 
-        int[] arrBAsInt = new int[arrB.length];
-        int[] arrAAsInt = new int[arrA.length];
+        int index = 0;
 
-        for (int i = 0; i < arrBAsInt.length; i++) {
-            arrBAsInt[i] = Integer.parseInt(arrB[i]);
+        int[] arrB = new int[arrBAsString.length];
+        int[] arrA = new int[arrAAsString.length];
+
+        for (int i = 0; i < arrB.length; i++) {
+            arrB[i] = Integer.parseInt(arrBAsString[i]);
         }
 
-        for (int i = 0; i < arrAAsInt.length; i++) {
-            arrAAsInt[i] = Integer.parseInt(arrA[i]);
+        for (int i = 0; i < arrA.length; i++) {
+            arrA[i] = Integer.parseInt(arrAAsString[i]);
         }
 
         // Filling the array list
         ArrayList<Integer> result = new ArrayList<>();
 
-
-        for (int i = 0; i < arrBAsInt.length; i++) {
-
-            int currElementInBAsInt = arrBAsInt[i];
+        // Looping through the elements in the subset array B
+        for (int i = 0; i < arrB.length; i++) {
+            int currB = arrB[i];
 
             for (int j = 0; j < arrA.length; j++) {
+                int currA = arrA[j];
 
-                // If the current element in B equals an element in A
-                if (currElementInBAsInt == arrAAsInt[j]) {
+                if (currB == currA && j != arrA.length - 1) {
+                    for (int k = j + 1; k <= arrA.length ; k++) {
+                        int nextA = arrA[k];
 
-                    // Make sure the current element in B is not the last
-                    // element in A
-                    if (j != arrAAsInt.length - 1) {
-                        // The next element in the parent arrA
-                        int nextElementInAAsInt = arrAAsInt[j + 1];
-
-                        if (nextElementInAAsInt > currElementInBAsInt) {
-                            result.add(nextElementInAAsInt);
-                        } else {
+                        if (nextA > currB) {
+                            result.add(nextA);
+                            break;
+                        } else if (nextA <= currB && k == arrA.length - 1) {
                             result.add(-1);
+                            break;
                         }
-                    } else {
-                        result.add(-1);
                     }
+                } else if (currB == currA && j == arrA.length - 1) {
+                    result.add(-1);
                 }
-
             }
         }
-
         // Prints the result
         for (int i = 0; i < result.size(); i++) {
             System.out.print(result.get(i));
@@ -78,6 +75,5 @@ public class MockExams4Task2GreaterNumber {
                 System.out.print(",");
             }
         }
-
     }
 }
