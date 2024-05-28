@@ -27,84 +27,64 @@ public class MockExams4Task3TitleSearch {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Read the title string
+        // Reading the title word
         String title = scanner.nextLine();
 
+        // String builder to store the modified string ONLY IF
+        // all the characters from the checkWord
+        // are present in the title word
         StringBuilder titleAsSb = new StringBuilder(title);
 
         // The number of lines of text to follow
         int n = Integer.parseInt(scanner.nextLine());
 
-        // Declaring a String array to store the text in the next n lines
-        String[] all = new String[n];
-
-        // The remaining strings are stored in an ArrayList each time after
-        // all the characters from the current target element are checked
-        ArrayList<String> result = new ArrayList<>();
-
         // Is the titleAsSb modified
-        boolean isModified = false;
+        boolean isContained = false;
 
-        String noTitleFounds = "No such title found!";
+        // Check the array of words
+        for (int k = 0; k < n; k++) {
 
-        // Fills the all array with the string on the n lines
-        for (int i = 0; i < n; i++) {
-            all[i] = scanner.nextLine();
-        }
+            String checkWord = scanner.nextLine();
 
+            // Check each letter from the checkWord
+            for (int i = 0; i < checkWord.length(); i++) {
 
-        String currStr = "";
-        char currCharTarget = '0';
-        char currCharTitle = '0';
-        int index = 0;
-        int toK = 0;
+                int currCharInCheck = checkWord.charAt(i);
 
-        for (int i = 0; i < all.length; i++) {
+                for (int j = 0; j < title.length(); j++) {
+                    int currCharInTitle = title.charAt(j);
 
-            // The current element in the all String array
-            currStr = all[i];
-
-            // For every character in the currStr String
-            for (int j = 0; j < currStr.length() ; j++) {
-
-                // Resets the isModified variable
-                isModified = false;
-
-                currCharTarget = currStr.charAt(j);
-
-                // Loops through each character in the titleAsSb String
-                for (int k = index; k < titleAsSb.length(); k++) {
-                    
-                    currCharTitle = titleAsSb.charAt(index);
-
-                    // If the index j char of the first string equals any of the
-                    // remaining characters in titleAsSb
-                    if (currCharTarget == currCharTitle) {
-                        isModified = true;
-                        // Deletes the character at that place
-                        titleAsSb.deleteCharAt(k);
+                    if (currCharInCheck == currCharInTitle && titleAsSb.charAt(j) != '0') {
+                        isContained = true;
+                        titleAsSb.setCharAt(j, '0');
                         break;
-                    } else {
-                        index++;
+                    } else if (j == title.length() - 1) {
+                        if (currCharInCheck == currCharInTitle) {
+                            titleAsSb.setCharAt(j, '0');
+                            isContained = true;
+                            break;
+                        } else {
+                            break;
+                        }
                     }
-
+                    isContained = false;
                 }
-
             }
 
-            index = 0;
-
-            if (isModified) {
-                result.add(titleAsSb.toString());
+            if (isContained == true) {
+                for (int i = 0; i < titleAsSb.length(); i++) {
+                    if (titleAsSb.charAt(i) == '0') {
+                        titleAsSb.deleteCharAt(i);
+                        i--;
+                    }
+                }
+                System.out.println(titleAsSb);
+                title = titleAsSb.toString();
             } else {
-                result.add("No such title found!");
+                titleAsSb.setLength(0);
+                titleAsSb.append(title);
+                System.out.println("No such title found!");
             }
-
         }
-
-        for (String s : result) {
-            System.out.println(s);
-        }
-
     }
 }
