@@ -7,9 +7,9 @@ If the obtained crookedDigit is bigger than 9, step 1. is repeated, otherwise th
 The last obtained value of N is the crookedDigit, calculated by the algorithm.
 
 Input
-The input data should be read from the console.
-The only line in the input contains a number N, which can be an integer or real number (decimal fraction), positive or negative.
-The input data will always be valid and in the format described. There is no need to check it explicitly.
+The inputNString data should be read from the console.
+The only line in the inputNString contains a number N, which can be an integer or real number (decimal fraction), positive or negative.
+The inputNString data will always be valid and in the format described. There is no need to check it explicitly.
 Output
 The output data should be printed on the console.
 
@@ -21,53 +21,37 @@ The decimal separator will always be the "." symbol.
 
  */
 
-
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class MockExams1Task1CrookedDigits {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Reading the number N as a string
-        String input = scanner.nextLine();
+        String n = scanner.nextLine();
 
-        double n = Double.parseDouble(input);
+        int result = Integer.MAX_VALUE;
 
-        int length = input.length();
+        while (result > 9) {
 
-        String nToString = input;
+            result = 0;
 
+            for (int i = 0; i < n.length(); i++) {
 
-        int crookedDigit = 0;
-
-        while (true) {
-
-            for (int i = 0; i < length; i++) {
-                if (nToString.charAt(i) == ',' || nToString.charAt(i) == '.') {
+                if (n.charAt(i) == '-') {
+                    continue;
+                } else if (n.charAt(i) == '.') {
                     continue;
                 } else {
-                    char currDigit = input.charAt(i);
-                    int numValueCurrDigit = Character.getNumericValue(currDigit);
+                    String currChar = String.valueOf(n.charAt(i));
+                    int currNumInN = Integer.parseInt(String.valueOf(n.charAt(i)));
 
-                    crookedDigit += numValueCurrDigit;
+                    result += currNumInN;
                 }
             }
-
-            if (crookedDigit <= 9) {
-                System.out.print(crookedDigit);
-                break;
-            } else {
-                n = n + crookedDigit;
-                System.out.println(n);
-
-                length = Double.toString(n).length();
-                nToString = Double.toString(n);
-            }
-
+            n = String.valueOf(result);
         }
 
+
+        System.out.println(result);
     }
 }
