@@ -17,25 +17,42 @@ The result should be the calculated biggest number.
 The calculation order
  */
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MockExams2Task1Game {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        
+
         // Reads the number as string
         String[] number = scanner.nextLine().split("");
 
-        int biggestNumber = 0;
+        ArrayList<Integer> results = new ArrayList<>();
+
+        int biggestNumber = Integer.MIN_VALUE;
 
         // Get the digits of the number in an int variable
-        int digit1 = Integer.parseInt(number[0]);
-        int digit2 = Integer.parseInt(number[1]);
-        int digit3 = Integer.parseInt(number[2]);
+        int d1 = Integer.parseInt(number[0]);
+        int d2 = Integer.parseInt(number[1]);
+        int d3 = Integer.parseInt(number[2]);
 
-        int multiply = ((digit1 * digit3) * digit2) + digit1;
+        // Possible scenarios;
+        int plus = d1 + d2 + d3;
+        results.add(plus);
+        int multiply1 = d1 * d2 * d3;
+        results.add(multiply1);
+        int multiply2 = d1 * d2 + d3;
+        results.add(multiply2);
+        int multiply3 = d1 + d2 * d3;
+        results.add(multiply3);
 
-        System.out.println(multiply);
+        for (int s : results) {
+            if (s > biggestNumber) {
+                biggestNumber = s;
+            }
+        }
+
+        System.out.println(biggestNumber);
 
     }
 }
