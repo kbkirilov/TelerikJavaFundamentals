@@ -22,54 +22,45 @@ For each word from WORDS print either:
 "No", if the word is NOT an anagram of W;
  */
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class MockExams2Task3WordAnagrams {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String subjWord = scanner.nextLine();
-        String[] arrSubjWord = subjWord.split("");
-        int subjWordLength = subjWord.length();
+        char[] anagrams = scanner.nextLine().toCharArray();
+        Arrays.sort(anagrams);
 
-        String currWord = "";
-        int currWordLength = 0;
+        int numberOfWords = Integer.parseInt(scanner.nextLine());
 
-        // This is used to get each character in the sub word
-        String charOfSub = "";
+        // This will store the answers
+        String[] answers = new String[numberOfWords];
 
-        // How many words we will have the arrWords
-        int numberWord = Integer.parseInt(scanner.nextLine());
-
-        String[] arrWords = new String[numberWord];
-
-        // Filling the arrWords array with words
-        for (int i = 0; i < numberWord; i++) {
-            arrWords[i] = scanner.nextLine();
-        }
-
-        for (int i = 0; i < numberWord; i++) {
-
-            currWord = arrWords[i];
-            currWordLength = arrWords[i].length();
-
-
-            // If the length is smaller than the subject word it's a no
-            if (currWordLength != subjWordLength) {
-                System.out.println("No");
+        for (int i = 0; i < numberOfWords; i++) {
+            char[] word = scanner.nextLine().toCharArray();
+            if (word.length != anagrams.length) {
+                answers[i] = "No";
                 continue;
-            } else {
-                for (int j = 0; j < subjWordLength; j++) {
-
-                    charOfSub = Character.toString(subjWord.charAt(j));
-
-                    if (!currWord.contains(charOfSub)) {
-                        System.out.println("No");
-                        continue;
-                    }
+            }
+            Arrays.sort(word);
+            boolean areEqual = true;
+            for (int j = 0; j < word.length; j++) {
+                if (word[j] != anagrams[j]) {
+                    answers[i] = "No";
+                    areEqual = false;
+                    break;
                 }
             }
-            System.out.println("Yes");
+            if (areEqual) {
+                answers[i] = "Yes";
+            }
+
         }
+
+        for (String str : answers) {
+            System.out.println(str);
+        }
+
     }
 }
