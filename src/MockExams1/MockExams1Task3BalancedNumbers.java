@@ -16,7 +16,6 @@ Constraints
 No more than 1000 numbers will be given
 
  */
-
 import java.util.Scanner;
 
 public class MockExams1Task3BalancedNumbers {
@@ -39,7 +38,7 @@ public class MockExams1Task3BalancedNumbers {
 
         }
 
-        System.out.println();
+        System.out.println(result);
 
     }
 }
