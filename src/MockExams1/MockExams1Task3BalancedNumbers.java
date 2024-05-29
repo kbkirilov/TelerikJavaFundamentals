@@ -23,31 +23,23 @@ public class MockExams1Task3BalancedNumbers {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int digit1 = 0;
-        int digit2 = 0;
-        int digit3 = 0;
-
-        int sum = 0;
+        int result = 0;
 
         while (true) {
-            // Reads the numberAsString
-            String numberAsString = scanner.nextLine();
-            
-            int number = Integer.parseInt(String.valueOf(numberAsString));
+            int input = scanner.nextInt();
+            int first = input / 100;
+            int middle = (input / 10) % 10;
+            int last = input % 10;
 
-            digit1 = Integer.parseInt(String.valueOf(numberAsString.charAt(0)));
-            digit2 = Integer.parseInt(String.valueOf(numberAsString.charAt(1)));
-            digit3 = Integer.parseInt(String.valueOf(numberAsString.charAt(2)));
-
-            // Check if it is balanced or not
-            if (digit2 == digit1 + digit3) {
-                sum += number;
-            } else {
+            if (middle != first + last) {
                 break;
+            } else {
+                result += input;
             }
+
         }
 
-        System.out.println(sum);
+        System.out.println();
 
     }
 }
