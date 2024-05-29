@@ -29,14 +29,9 @@ public class MockExams1Task3BalancedNumbers {
 
         int sum = 0;
 
-        int sumDigits = 0;
-
-
         while (true) {
             // Reads the numberAsString
             String numberAsString = scanner.nextLine();
-
-            boolean isBalanced = true;
             
             int number = Integer.parseInt(String.valueOf(numberAsString));
 
@@ -48,10 +43,8 @@ public class MockExams1Task3BalancedNumbers {
             if (digit2 == digit1 + digit3) {
                 sum += number;
             } else {
-                isBalanced = false;
                 break;
             }
-
         }
 
         System.out.println(sum);
