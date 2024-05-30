@@ -24,35 +24,31 @@ public class MockExams2Task1Game {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Reads the number as string
-        String[] number = scanner.nextLine().split("");
+        int input = scanner.nextInt();
 
-        ArrayList<Integer> results = new ArrayList<>();
+        int first = input / 100;
+        int middle = (input / 10) % 10;
+        int last = input % 10;
 
-        int biggestNumber = Integer.MIN_VALUE;
 
-        // Get the digits of the number in an int variable
-        int d1 = Integer.parseInt(number[0]);
-        int d2 = Integer.parseInt(number[1]);
-        int d3 = Integer.parseInt(number[2]);
+        int biggest = first + middle + last;
+        int currentExpression = first * middle * last;
 
-        // Possible scenarios;
-        int plus = d1 + d2 + d3;
-        results.add(plus);
-        int multiply1 = d1 * d2 * d3;
-        results.add(multiply1);
-        int multiply2 = d1 * d2 + d3;
-        results.add(multiply2);
-        int multiply3 = d1 + d2 * d3;
-        results.add(multiply3);
-
-        for (int s : results) {
-            if (s > biggestNumber) {
-                biggestNumber = s;
-            }
+        if (currentExpression > biggest) {
+            biggest = currentExpression;
         }
 
-        System.out.println(biggestNumber);
+        currentExpression = first + middle * last;
+        if (currentExpression > biggest) {
+            biggest = currentExpression;
+        }
+
+        currentExpression = first * middle + last;
+        if (currentExpression > biggest) {
+            biggest = currentExpression;
+        }
+
+        System.out.println(biggest);
 
     }
 }
