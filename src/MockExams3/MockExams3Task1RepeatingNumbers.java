@@ -25,40 +25,20 @@ public class MockExams3Task1RepeatingNumbers {
         Scanner scanner = new Scanner(System.in);
 
         int lines = scanner.nextInt();
-
         int[] arrNumbers = new int[lines];
-        
-        // Used to count the number of occurrences of a
-        // repeating number
-        int temp = 0;
-        int maxCount = 0;
-        int count = 0;
-        int maxNumber = 0;
-        int index = 0;
 
         // Filling the array
         for (int i = 0; i < lines; i++) {
             arrNumbers[i] = scanner.nextInt();
         }
 
-        for (int i = 0; i < arrNumbers.length; i++) {
-            
-            int currentNumber = arrNumbers[i];
+        int maxNumber = arrNumbers[0];
 
-            for (int j = index + 1; j < arrNumbers.length - 1; j++) {
-                if (arrNumbers[i] == arrNumbers[j]) {
-                    count++;
-                }
-                index++;
-            }
-
-            if (count > maxCount) {
+        // Checking up
+        for (int i = arrNumbers.length - 1; i >= 1; i--) {
+            if (arrNumbers[i] == i) {
                 maxNumber = arrNumbers[i];
             }
-
-            count = 0;
-            index = 0;
-            
         }
 
         System.out.println(maxNumber);
