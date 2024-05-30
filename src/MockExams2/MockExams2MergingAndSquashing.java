@@ -38,68 +38,39 @@ import java.util.Scanner;
 public class MockExams2MergingAndSquashing {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
-        // Read the lines
-        int lines = Integer.parseInt(scanner.nextLine());
-
-        String[] numbersAsString = new String[lines];
-
-        // Used for storing the result numbers
-        StringBuilder numbersMerges = new StringBuilder();
-        StringBuilder numbersSquashed = new StringBuilder();
-
-        // Fill the string array with the numbers
-        for (int i = 0; i < lines; i++) {
-            numbersAsString[i] = scanner.nextLine();
+        int n = scanner.nextInt();
+        int[] numbers = new int[n];
+        for (int i = 0; i < n; i++) {
+            numbers[i] = scanner.nextInt();
         }
 
-        // Third number
-        int middleNumber = 0;
+        StringBuilder mergedNumbers = new StringBuilder();
+        StringBuilder squashedNumbers = new StringBuilder();
 
-        String middleNumberAsString = "";
+        for (int i = 0; i < n - 1; i++) {
+            // merged numbers => ac ds = bc
+            mergedNumbers.append(numbers[i] % 10);
+            mergedNumbers.append(numbers[i + 1] / 10);
+            mergedNumbers.append(" ");
 
-        String temp = "";
 
-        //
-        int currElIndex1Int = 0;
-        int nextEllIndex0Int = 0;
+            // squashed numbers => ab cd = a(b+c)d
+            squashedNumbers.append(numbers[i] / 10);
+            int squashedMiddleNumber = (numbers[i] % 10) + (numbers[i + 1] / 10);
+            squashedMiddleNumber %= 10;
+            squashedNumbers.append(squashedMiddleNumber);
+            squashedNumbers.append(numbers[i + 1] % 10);
+            squashedNumbers.append(" ");
 
-        // Loops through the numbers
-        for (int i = 0; i < numbersAsString.length - 1; i++) {
-
-            // Gets the current and next elements in the arrStr array
-            String currEl = numbersAsString[i];
-            String nextEl = numbersAsString[i + 1];
-
-            // Get the characters
-            String currElIndex0 = Character.toString(currEl.charAt(0));
-            String currElIndex1 = Character.toString(currEl.charAt(1));
-            String nextElIndex0 = Character.toString(nextEl.charAt(0));
-            String nextElIndex1 = Character.toString(nextEl.charAt(1));
-
-            // Parse to int
-            currElIndex1Int = Integer.parseInt(currElIndex1);
-            nextEllIndex0Int = Integer.parseInt(nextElIndex0);
-
-            // Fills the numbersMerges string
-            numbersMerges.append(currElIndex1 + "" + nextElIndex0 + " ");
-
-            // Gets the middle number when calculating the squashing algorithm
-            if (currElIndex1Int + nextEllIndex0Int < 10 ) {
-                middleNumber = currElIndex1Int + nextEllIndex0Int;
-                middleNumberAsString = String.valueOf(middleNumber);
-            } else {
-                middleNumber = currElIndex1Int + nextEllIndex0Int;
-                temp = String.valueOf(middleNumber);
-                middleNumberAsString = Character.toString(temp.charAt(1));
-            }
-
-            // Fills the numbersSquashed string
-            numbersSquashed.append(currElIndex0 + "" + middleNumberAsString + "" + nextElIndex1 + " ");
 
         }
 
-        System.out.println(numbersMerges);
-        System.out.println(numbersSquashed);
+        mergedNumbers.deleteCharAt(mergedNumbers.length() - 1);
+        squashedNumbers.deleteCharAt(squashedNumbers.length() - 1);
+
+        System.out.println(mergedNumbers);
+        System.out.println(squashedNumbers);
+
+
     }
 }
