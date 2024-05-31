@@ -22,22 +22,27 @@ the number of small bottles he will deliver.
  */
 import java.util.Scanner;
 
-public class MockExams5Task1 {
+public class MockExams5Task1MineralWater {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int smallBottlesCount = scanner.nextInt();
         int bigBottlesCount = scanner.nextInt();
         int truckCapacity = scanner.nextInt();
 
-        // This stores how much space left he has after
-        // he loads all the big bottles
-        int capacityAfterFillWithBigBottles = truckCapacity - (bigBottlesCount * 5);
+        // Calculate maximum capacity that can be filled with big bottles
+        int maxBigBottlesUsed = truckCapacity / 5;
 
-        if (smallBottlesCount < capacityAfterFillWithBigBottles) {
-            System.out.print(-1);
+        // Use the lesser of available big bottles or required big bottles
+        int bigBottlesUsed = Math.min(bigBottlesCount, maxBigBottlesUsed);
+
+        // Calculate the remaining capacity to be filled with small bottles
+        int remainingCapacity = truckCapacity - (bigBottlesUsed * 5);
+
+        // Check if the remaining capacity can be filled with small bottles
+        if (remainingCapacity <= smallBottlesCount) {
+            System.out.print(remainingCapacity);
         } else {
-            System.out.print(capacityAfterFillWithBigBottles);
+            System.out.print(-1);
         }
-
     }
 }
