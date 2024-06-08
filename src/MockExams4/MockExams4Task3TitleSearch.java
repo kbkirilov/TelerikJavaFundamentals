@@ -27,64 +27,50 @@ public class MockExams4Task3TitleSearch {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Reading the title word
+        // Read the title string
         String title = scanner.nextLine();
 
-        // String builder to store the modified string ONLY IF
-        // all the characters from the checkWord
-        // are present in the title word
-        StringBuilder titleAsSb = new StringBuilder(title);
+        // Read the number of queries
+        int N = scanner.nextInt();
+        scanner.nextLine(); // consume the newline after the integer input
 
-        // The number of lines of text to follow
-        int n = Integer.parseInt(scanner.nextLine());
+        // Process each query
+        for (int i = 0; i < N; i++) {
+            String query = scanner.nextLine();
+            StringBuilder sb = new StringBuilder(title);
+            int titleIndex = 0;
+            int queryIndex = 0;
 
-        // Is the titleAsSb modified
-        boolean isContained = false;
-
-        // Check the array of words
-        for (int k = 0; k < n; k++) {
-
-            String checkWord = scanner.nextLine();
-
-            // Check each letter from the checkWord
-            for (int i = 0; i < checkWord.length(); i++) {
-
-                int currCharInCheck = checkWord.charAt(i);
-
-                for (int j = 0; j < title.length(); j++) {
-                    int currCharInTitle = title.charAt(j);
-
-                    if (currCharInCheck == currCharInTitle && titleAsSb.charAt(j) != '0') {
-                        isContained = true;
-                        titleAsSb.setCharAt(j, '0');
-                        break;
-                    } else if (j == title.length() - 1) {
-                        if (currCharInCheck == currCharInTitle) {
-                            titleAsSb.setCharAt(j, '0');
-                            isContained = true;
-                            break;
-                        } else {
-                            break;
-                        }
-                    }
-                    isContained = false;
+            // Try to find the query in the title
+            while (titleIndex < sb.length() && queryIndex < query.length()) {
+                if (sb.charAt(titleIndex) == query.charAt(queryIndex)) {
+                    queryIndex++;
                 }
+                titleIndex++;
             }
 
-            if (isContained == true) {
-                for (int i = 0; i < titleAsSb.length(); i++) {
-                    if (titleAsSb.charAt(i) == '0') {
-                        titleAsSb.deleteCharAt(i);
-                        i--;
+            // If the entire query was found
+            if (queryIndex == query.length()) {
+                titleIndex = 0;
+                queryIndex = 0;
+
+                // Remove the characters of the query from the title
+                while (queryIndex < query.length()) {
+                    if (sb.charAt(titleIndex) == query.charAt(queryIndex)) {
+                        sb.deleteCharAt(titleIndex);
+                        queryIndex++;
+                    } else {
+                        titleIndex++;
                     }
                 }
-                System.out.println(titleAsSb);
-                title = titleAsSb.toString();
+                title = sb.toString();  // Update title with the new string
+                System.out.println(title);
             } else {
-                titleAsSb.setLength(0);
-                titleAsSb.append(title);
+                // If the query could not be found in the title
                 System.out.println("No such title found!");
             }
         }
+
+        scanner.close();
     }
 }
