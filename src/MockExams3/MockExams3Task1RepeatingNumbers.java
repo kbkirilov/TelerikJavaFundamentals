@@ -24,32 +24,35 @@ public class MockExams3Task1RepeatingNumbers {
     public static void main(String[] args) {
         // Input
         Scanner scanner = new Scanner(System.in);
-        int lines = scanner.nextInt();
+        // Read the number of elements
+        int N = scanner.nextInt();
 
-        // The input numbers are all between 1 and 10, so we will use this array to count them
-        // The counted number will serve as an index to its count
-        int[] count = new int[10];
+        // Initialize an array to count occurrences of numbers between 1 and 10
+        int[] count = new int[11]; // indices 1 to 10 will be used
 
-        // Use to store the number the max number of repetitions
-        int maxValue = 0;
-        for (int i = 0; i < lines; i++) {
+        // Read each number and update the count
+        for (int i = 0; i < N; i++) {
             int number = scanner.nextInt();
-
-            // Increase the count associated with that number
-            count[number - 1]++;
-
-            // Update the max number of repetitions if necessary
-            if (count[number - 1] > maxValue) {
-                maxValue = count[number - 1];
-            }
+            count[number]++;
         }
+
+        // Determine the number that occurs the most times
+        int maxCount = -1;
+        int result = Integer.MAX_VALUE;
 
         for (int i = 1; i <= 10; i++) {
-            // Find the number that corresponds to the max number of repetitions and print it
-            if (count[i - 1] == maxValue) {
-                System.out.println(i);
-                break;
+            if (count[i] > maxCount) {
+                maxCount = count[i];
+                result = i;
+            } else if (count[i] == maxCount) {
+                result = Math.min(result, i);
             }
         }
+
+        // Print the result
+        System.out.println(result);
+
+        // Close the scanner
+        scanner.close();
     }
 }
