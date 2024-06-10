@@ -27,25 +27,30 @@ public class MockExams1Task1CrookedDigits {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String line = scanner.nextLine();
-        String[] arr = line.split("");
-        int result = 0;
+        String n = scanner.nextLine();
 
-        for (String str : arr) {
-            if (str.equals("-") || str.equals(".")) {
-                continue;
-            }
-
-            result += Integer.parseInt(str);
-        }
+        int result = Integer.MAX_VALUE;
 
         while (result > 9) {
-            int temp = 0;
-            while (result != 0) {
-                temp += result % 10;
-                result /= 10;
+
+            result = 0;
+
+            for (int i = 0; i < n.length(); i++) {
+
+                if (n.charAt(i) == '-') {
+                    continue;
+                } else if (n.charAt(i) == '.') {
+                    continue;
+                } else {
+                    int currNumInN = Integer.parseInt(String.valueOf(n.charAt(i)));
+
+                    result += currNumInN;
+                }
             }
+            n = String.valueOf(result);
         }
 
+
+        System.out.println(result);
     }
 }
