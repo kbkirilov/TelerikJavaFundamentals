@@ -22,26 +22,34 @@ import java.util.Scanner;
 
 public class MockExams3Task1RepeatingNumbers {
     public static void main(String[] args) {
+        // Input
         Scanner scanner = new Scanner(System.in);
-
         int lines = scanner.nextInt();
-        int[] arrNumbers = new int[lines];
 
-        // Filling the array
+        // The input numbers are all between 1 and 10, so we will use this array to count them
+        // The counted number will serve as an index to its count
+        int[] count = new int[10];
+
+        // Use to store the number the max number of repetitions
+        int maxValue = 0;
         for (int i = 0; i < lines; i++) {
-            arrNumbers[i] = scanner.nextInt();
-        }
+            int number = scanner.nextInt();
 
-        int maxNumber = arrNumbers[0];
+            // Increase the count associated with that number
+            count[number - 1]++;
 
-        // Checking up
-        for (int i = arrNumbers.length - 1; i >= 1; i--) {
-            if (arrNumbers[i] == i) {
-                maxNumber = arrNumbers[i];
+            // Update the max number of repetitions if necessary
+            if (count[number - 1] > maxValue) {
+                maxValue = count[number - 1];
             }
         }
 
-        System.out.println(maxNumber);
-
+        for (int i = 1; i <= 10; i++) {
+            // Find the number that corresponds to the max number of repetitions and print it
+            if (count[i - 1] == maxValue) {
+                System.out.println(i);
+                break;
+            }
+        }
     }
 }
